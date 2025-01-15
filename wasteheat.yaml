@@ -5,22 +5,22 @@
 
 anchorLinks:
   - link: &grafana-home
-      url: "https://grafana.com/"
-      params: "time"
+      url: "https://tourengine.grafana.net/d/athena-dynamic-dashboard-1/alpha-enable-dashboard?orgId=1&from=2024-12-19T08:00:00.000Z&to=2024-12-20T07:59:59.000Z&timezone=browser&var-device=c4821e63&var-message=can1_powerhours&var-signal=invtrkw%20%20%20%20%20%20%20%20%20%20%20%20%20&var-signal_value=$__all&var-aggregation=AVG&kiosk="
+      params: "time, engoiltemp"
 
 #------------------------------------------------------------------------------
 # Panel Config
 
-cellIdPreamble: "cell-"
+cellIdPreamble: "ResHotIn"
 cells: 
   drawio:
     link:
-      url: "https://app.diagrams.net/?p=svgdata"
+      url: "https://app.diagrams.net/#G1G-3VqLxU_w63tViz61C73itvjWyf6Rdl#%7B%22pageId%22%3A%22w01_Q1XR7i9GtXlrWC30%22%7D"
   docs:
     link:
       url: "https://github.com/andymchugh/andrewbmchugh-flow-panel/blob/main/src/README.md"
   inbox_depth:
-    dataRef: "test-data-large-sin"
+    dataRef: "tbl_c4821e63_can1_enginesensoriidata"
     label:
       separator: "cr"
       units: "none"
@@ -33,7 +33,7 @@ cells:
         - {color: "red", level: 1000}
     link: *grafana-home
   db_transactions:
-    dataRef: "test-data-large-cos"
+    dataRef: "tbl_c4821e63_can1_enginesensoriidata"
     label:
       separator: "cr"
       units: "ops"
