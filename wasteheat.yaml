@@ -1,27 +1,16 @@
 cells:
-  ResHotIn: # The ID in your SVG that you want to reference
-    dataRef: "engtemp" # The queried value name from your datasource
+  ResHotIn: # Matches the ID in your SVG
+    dataRef: "engtemp" # Query alias or field name
 
     label:
-      # Map the queried value directly to the label text
       dataRef: "engtemp"
-      datapoint: "last" # Use the most recent value
-      separator: " " # No separator between value and units
-      units: "°C" # Append Celsius as the unit
-      decimalPoints: 1 # Display one decimal place
+      datapoint: "last"
+      units: "°C"
+      decimalPoints: 1
 
     labelColor:
-      # Map the color dynamically based on the value thresholds
       dataRef: "engtemp"
       thresholds:
-        - {color: "green", level: 50} # Green if value <= 50
-        - {color: "orange", level: 80} # Orange if value > 50 and <= 80
-        - {color: "red", level: 100} # Red if value > 80
-
-    fillColor:
-      # Dynamically change the fill color of the shape based on thresholds
-      dataRef: "engtemp"
-      thresholds:
-        - {color: "lightblue", level: 50} # Light blue if value <= 50
-        - {color: "yellow", level: 80} # Yellow if value > 50 and <= 80
-        - {color: "darkred", level: 100} # Dark red if value > 80
+        - {color: "green", level: 50}
+        - {color: "orange", level: 80}
+        - {color: "red", level: 100}
