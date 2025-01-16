@@ -1,70 +1,27 @@
----
+cells:
+  ResHotIn: # The ID in your SVG that you want to reference
+    dataRef: "engtemp" # The queried value name from your datasource
 
-#------------------------------------------------------------------------------
-# YAML Aliases to simplify maintenance
-
-anchorLinks:
-  - link: &grafana-home
-      url: "https://tourengine.grafana.net/d/athena-dynamic-dashboard-1/alpha-enable-dashboard?orgId=1&from=2024-12-19T08:00:00.000Z&to=2024-12-20T07:59:59.000Z&timezone=browser&var-device=c4821e63&var-message=can1_powerhours&var-signal=invtrkw%20%20%20%20%20%20%20%20%20%20%20%20%20&var-signal_value=$__all&var-aggregation=AVG&kiosk="
-      params: "time, engoiltemp"
-
-#------------------------------------------------------------------------------
-# Panel Config
-
-cellIdPreamble: "ResHotIn"
-cells: 
-  drawio:
-    link:
-      url: "https://app.diagrams.net/#G1G-3VqLxU_w63tViz61C73itvjWyf6Rdl#%7B%22pageId%22%3A%22w01_Q1XR7i9GtXlrWC30%22%7D"
-  docs:
-    link:
-      url: "https://github.com/andymchugh/andrewbmchugh-flow-panel/blob/main/src/README.md"
-  inbox_depth:
-    dataRef: "tbl_c4821e63_can1_enginesensoriidata"
     label:
-      separator: "cr"
-      units: "none"
-      decimalPoints: 0
+      # Map the queried value directly to the label text
+      dataRef: "engtemp"
+      datapoint: "last" # Use the most recent value
+      separator: " " # No separator between value and units
+      units: "°C" # Append Celsius as the unit
+      decimalPoints: 1 # Display one decimal place
+
     labelColor:
-      gradientMode: "hue"
+      # Map the color dynamically based on the value thresholds
+      dataRef: "engtemp"
       thresholds:
-        - {color: "green", level: 0}
-        - {color: "orange", level: 500}
-        - {color: "red", level: 1000}
-    link: *grafana-home
-  db_transactions:
-    dataRef: "tbl_c4821e63_can1_enginesensoriidata"
-    label:
-      separator: "cr"
-      units: "ops"
-      decimalPoints: 0
+        - {color: "green", level: 50} # Green if value <= 50
+        - {color: "orange", level: 80} # Orange if value > 50 and <= 80
+        - {color: "red", level: 100} # Red if value > 80
+
     fillColor:
-      gradientMode: "hue"
+      # Dynamically change the fill color of the shape based on thresholds
+      dataRef: "engtemp"
       thresholds:
-        - {color: "semi-dark-green", level: 0}
-        - {color: "orange", level: 400}
-        - {color: "red", level: 800}
-    link: *grafana-home
-  start_rate:
-    dataRef: "test-data-small-sin"
-    label:
-      separator: "colon"
-      units: "pps"
-      decimalPoints: 0
-    labelColor:
-      gradientMode: "hue"
-      thresholds:
-        - {color: "green", level: 0}
-        - {color: "orange", level: 100}
-    link: *grafana-home
-  active_workers:
-    dataRef: "test-data-small-cos"
-    label:
-      separator: "cr"
-      units: "none"
-      decimalPoints: 0
-    labelColor:
-      gradientMode: "hue"
-      thresholds:
-        - {color: "#888888", level: 0}
-        - {color: "light-blue", level: 100}
+        - {color: "lightblue", level: 50} # Light blue if value <= 50
+        - {color: "yellow", level: 80} # Yellow if value > 50 and <= 80
+        - {color: "darkred", level: 100} # Dark red if value > 80
