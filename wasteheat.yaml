@@ -1,16 +1,70 @@
+# Panel-level configuration
 cells:
   ResHotIn: # Matches the ID in your SVG
     dataRef: "engtemp" # Query alias or field name
 
+    # Label configuration
     label:
-      dataRef: "engtemp"
-      datapoint: "last"
-      units: "°C"
-      decimalPoints: 1
+      dataRef: "engtemp"  # Query field to display
+      datapoint: "last"   # Use the most recent value
+      units: "°C"         # Display the value in Celsius
+      decimalPoints: 1    # One decimal place for the value
 
+    # Label color configuration based on thresholds
     labelColor:
       dataRef: "engtemp"
       thresholds:
-        - {color: "green", level: 50}
-        - {color: "orange", level: 80}
-        - {color: "red", level: 100}
+        - {color: "green", level: 50}   # Green for values <= 50
+        - {color: "orange", level: 80}  # Orange for values > 50 and <= 80
+        - {color: "red", level: 100}    # Red for values > 80
+
+    # Fill color configuration (e.g., for rectangles or shapes)
+    fillColor:
+      dataRef: "engtemp"
+      thresholds:
+        - {color: "lightblue", level: 50}  # Light blue for values <= 50
+        - {color: "yellow", level: 80}     # Yellow for values > 50 and <= 80
+        - {color: "darkred", level: 100}   # Dark red for values > 80
+
+    # Stroke color (outline) configuration
+    strokeColor:
+      dataRef: "engtemp"
+      thresholds:
+        - {color: "blue", level: 50}       # Blue outline for values <= 50
+        - {color: "orange", level: 80}     # Orange outline for values > 50 and <= 80
+        - {color: "red", level: 100}       # Red outline for values > 80
+
+    # Optional animation for visualizing changes
+    flowAnimation:
+      dataRef: "engtemp"
+      thresholdLwrValue: 50                # Lower threshold for animation speed
+      thresholdLwrDurationSecs: 2          # Animation duration for lower threshold
+      thresholdUprValue: 100               # Upper threshold for animation speed
+      thresholdUprDurationSecs: 0.5        # Animation duration for upper threshold
+
+    # Link configuration for interactivity
+    link:
+      url: "https://tourengine.grafana.net/goto/Rh9y3aDNR?orgId=1"    # Replace with a relevant link
+      params: "time"                       # Append time parameters to the link
+      sameTab: true                        # Open the link in the same tab
+
+# Panel-level options (applies to all cells)
+zoomPanPinch:
+  wheelActivationKeys: ["Alt"]  # Require Alt+Scroll to zoom in/out
+
+linkWindow:
+  sameTab: true  # Open links in the same tab unless overridden
+
+gradientMode: "hue"  # Enable gradient colors for thresholds
+
+cellColorMappings:
+  darkTheme:
+    green: "light-green"
+    orange: "light-orange"
+    red: "light-red"
+  lightTheme:
+    green: "dark-green"
+    orange: "dark-orange"
+    red: "dark-red"
+
+datapoint: "lastNotNull"  # Default to the last non-null data point
